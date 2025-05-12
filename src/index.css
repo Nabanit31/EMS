@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 *{
-  margin: 0;
-  padding: 0;
+  /* margin: 0;
+  padding: 0; */
   box-sizing: border-box;
   font-family: gilroy;
   color: #fff;
 }
 html,
 body{
-  background-color: #777777;
+  background-color: #0f0e0e;
   height: 100%;
   width: 100%;
 }
