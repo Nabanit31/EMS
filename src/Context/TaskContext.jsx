@@ -1,8 +1,8 @@
 import React from 'react'
 
-const TaskContext = () => {
+const TaskContext = ({children}) => {
   return (
-    <div>TaskContext</div>
+    <div>{children}</div>
   )
 }
 
