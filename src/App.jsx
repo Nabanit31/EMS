@@ -1,5 +1,5 @@
 
-import { useContext,useState } from 'react'
+import { useContext,useState,useEffect } from 'react'
 import Login from './Components/Auth/Login'
 import AdminDashboard from './Components/Dashboard/AdminDashboard'
 import EmployeeDashboard from './Components/Dashboard/EmployeeDashboard'
@@ -8,7 +8,6 @@ import { setLocalStorage } from './Utils/LocalStorage'
 import { AuthContext } from './Context/AuthProvider'
 
 const App = () => {
-
 
 const [user, setUser] = useState(null)
 
@@ -30,11 +29,14 @@ const handleLogin = (email, password) => {
 
   return (
     <>
-     {!user ? <Login handleLogin = {handleLogin}/>: ''}
-     {user == 'admin' ? <AdminDashboard/> : <EmployeeDashboard/>}
+     { !user
+      ? <Login handleLogin={handleLogin} />
+      : user === 'admin'
+        ? <AdminDashboard />
+        : <EmployeeDashboard />
+    }
 
     </>
   )
 }
-
 export default App
