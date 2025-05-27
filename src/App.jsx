@@ -154,9 +154,9 @@ const handleLogout = () => {
   }
 
   return userRole === "admin" ? (
-    <AdminDashboard data={loggedInUserData} onLogout={handleLogout}/>
+    <AdminDashboard changeUser={setUserRole} data={loggedInUserData} onLogout={handleLogout}/>
   ) : (
-    <EmployeeDashboard data={loggedInUserData} onLogout={handleLogout}/>
+    <EmployeeDashboard changeUser={setUserRole} data={loggedInUserData} onLogout={handleLogout}/>
   );
 }
 export default App

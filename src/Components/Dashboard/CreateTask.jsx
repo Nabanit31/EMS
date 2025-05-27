@@ -1,9 +1,50 @@
-import React from 'react'
+import { useState } from "react"
+
 
 const CreateTask = () => {
+
+  const [taskTitle, setTaskTitle] = useState('')
+  const [taskDescription, setTaskDescription] = useState('')
+  const [taskDate, setTaskDate] = useState('')
+  const [assignTo, setAssignTo] = useState('')
+  const [category, setCategory] = useState('')
+
+
+  const [newTask, setNewTask] = useState({})
+
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    // console.log(taskTitle, taskDescription, taskDate, assignTo, category);
+   
+    setNewTask({taskTitle, taskDescription, taskDate, category,active:false,newTask:true,failed:false,completed:false})
+    // console.log(task)
+    const data = JSON.parse(localStorage.getItem('employees'))
+    // 
+    // console.log(data)
+    data.forEach(function(elem){
+      if(elem.firstName == assignTo){
+        elem.tasks.push(newTask)
+        console.log(elem.tasks)
+      }
+    })
+
+    setTaskDate('')
+    setTaskDescription('')
+    setTaskTitle('')
+    setAssignTo('')
+    setCategory('')
+
+  }
+
+
   return (
     <div>
-    <form className='w-full max-w-lg mx-auto mt-10 bg-emerald-500 p-4 rounded-md'> 
+    <form onSubmit={(e) => { 
+    
+      submitHandler(e)
+     } }
+    className='w-full max-w-lg mx-auto mt-10 bg-emerald-500 p-4 rounded-md'> 
   <div className='flex flex-wrap -mx-2 mb-4'> {/* Reduced negative margin and bottom margin */}
     {/* Task Title */}
     <div className='w-full md:w-1/2 px-2 mb-4 md:mb-0'> {/* Reduced horizontal padding and bottom margin */}
@@ -11,6 +52,8 @@ const CreateTask = () => {
         Task Title
       </label>
       <input
+      value={taskTitle}
+        onChange={(e) => setTaskTitle(e.target.value)}
         type="text"
         id="taskTitle"
         placeholder='Enter Task Title'
@@ -24,6 +67,8 @@ const CreateTask = () => {
         Date
       </label>
       <input
+      value={taskDate}
+        onChange={(e) => setTaskDate(e.target.value)}
         type="date"
         id="taskDate"
         placeholder='Select Date'
@@ -39,6 +84,8 @@ const CreateTask = () => {
         Assign
       </label>
       <input
+      value={assignTo}
+        onChange={(e) => setAssignTo(e.target.value)}
         type="text"
         id="assignee"
         placeholder='Assign employee task'
@@ -52,6 +99,8 @@ const CreateTask = () => {
         Category
       </label>
       <input
+      value={category}
+        onChange={(e) => setCategory(e.target.value)}
         type="text"
         id="category"
         placeholder='Enter Category'
@@ -67,6 +116,8 @@ const CreateTask = () => {
         Description
       </label>
       <textarea
+      value={taskDescription}
+        onChange={(e) => setTaskDescription(e.target.value)}
         id="description"
         cols="40"
         rows="6"
