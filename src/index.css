@@ -13,19 +13,19 @@ body{
   height: 100%;
   width: 100%;
 }
-#tasklist::-webkit-scrollbar{
+/* #tasklist::-webkit-scrollbar{
   display:none;
 }
 /* Add this to your main CSS file (e.g., styles.css) */
 
-.hide-scrollbar {
+/* .hide-scrollbar {
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
-}
+  /* scrollbar-width: none;  /* Firefox */
+/* }
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;  /* Safari and Chrome */
-}
+/* } */ 
 button{
   cursor: pointer;
 }

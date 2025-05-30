@@ -9,7 +9,7 @@ const FailedTask = ({data}) => {
         </h3>
         <h4 className='text-sm'>{data.date}</h4>
        </div>
-       <h2 className='mt-5 text-2xl font-semibold'>{data.failed}</h2>
+       <h2 className='mt-5 text-2xl font-semibold'>{data.title}</h2>
        <p className='text-sm mt-2'>
         {data.description}
        </p>

@@ -1,8 +1,8 @@
-import { useState } from "react"
-
+import { useContext, useState } from "react"
+import { AuthContext } from "../../Context/AuthProvider"
 
 const CreateTask = () => {
-
+  const [userData, setUserData] = useContext(AuthContext)
   const [taskTitle, setTaskTitle] = useState('')
   const [taskDescription, setTaskDescription] = useState('')
   const [taskDate, setTaskDate] = useState('')
@@ -15,28 +15,42 @@ const CreateTask = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // console.log(taskTitle, taskDescription, taskDate, assignTo, category);
-   
-    setNewTask({taskTitle, taskDescription, taskDate, category,active:false,newTask:true,failed:false,completed:false})
-    // console.log(task)
-    const data = JSON.parse(localStorage.getItem('employees'))
-    // 
-    // console.log(data)
-    data.forEach(function(elem){
-      if(elem.firstName == assignTo){
-        elem.tasks.push(newTask)
-        console.log(elem.tasks)
-      }
-    })
 
-    setTaskDate('')
-    setTaskDescription('')
-    setTaskTitle('')
-    setAssignTo('')
-    setCategory('')
+    // 1) Build the full task object here synchronously
+    const task = {
+      title:       taskTitle,
+      description: taskDescription,
+      date:        taskDate,
+      category:    category,
+      newTask:     true,
+      active:      false,
+      completed:   false,
+      failed:      false
+    };
 
-  }
+    // 2) Update the userData immutably via context setter
+    setUserData(prev =>
+      prev.map(emp =>
+        emp.firstName === assignTo
+          ? {
+              ...emp,
+              tasks: [...emp.tasks, task],
+              taskCount: {
+                ...emp.taskCount,
+                newTask: emp.taskCount.newTask + 1
+              }
+            }
+          : emp
+      )
+    );
 
+    // 3) Clear the form fields
+    setTaskTitle('');
+    setTaskDescription('');
+    setTaskDate('');
+    setAssignTo('');
+    setCategory('');
+    }
 
   return (
     <div>

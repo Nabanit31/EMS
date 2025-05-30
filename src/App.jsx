@@ -12,13 +12,9 @@ const App = () => {
 // localStorage.clear()
 
 
-const { employees, admin } = useContext(AuthContext);
-  const [userRole, setUserRole]           = useState(null);
-  const [loggedInUserData, setLoggedInUserData]   = useState(null);
-
-const [userData, setUserData] = useState(null)
-// loading flag while we rehydrate from localStorage
-  const [isRehydrating, setIsRehydrating] = useState(true);
+const [user, setUser] = useState(null)
+  const [loggedInUserData, setLoggedInUserData] = useState(null)
+  const [userData,SetUserData] = useContext(AuthContext)
 
 // const [loggedInUserData, setLoggedInUserData] = useState(null)
 // const Authdata = useContext(AuthContext)
@@ -49,28 +45,16 @@ const [userData, setUserData] = useState(null)
 
 
 
-    useEffect(() => {
-    if (!employees.length && !admin) {
-      // still waiting for AuthContext to populate
-      return;
+     useEffect(()=>{
+    const loggedInUser = localStorage.getItem('loggedInUser')
+    
+    if(loggedInUser){
+      const userData = JSON.parse(loggedInUser)
+      setUser(userData.role)
+      setLoggedInUserData(userData.data)
     }
 
-    const raw = localStorage.getItem('loggedInUser');
-    if (raw) {
-      const { role, email } = JSON.parse(raw);
-      setUserRole(role);
-
-      if (role === 'admin') {
-        setUserData(admin);
-      } else if (role === 'employee') {
-        const emp = employees.find(e => e.email === email);
-        setUserData(emp || null);
-      }
-    }
-
-    // done rehydrating
-    setIsRehydrating(false);
-  }, [employees, admin]);
+  },[])
 
 
 
@@ -93,32 +77,21 @@ const [userData, setUserData] = useState(null)
 // };
 
   const handleLogin = (email, password) => {
-    // admin check
-    if (email === admin.email && password === admin.password) {
-      setUserRole("admin");
-      setLoggedInUserData(admin);
-      localStorage.setItem(
-        "loggedInUser",
-        JSON.stringify({ role: "admin", email })
-      );
-
-    // employee check
-    } else {
-      const emp = employees.find(
-        (e) => e.email === email && e.password === password
-      );
-      if (emp) {
-        setUserRole("employee");
-        setLoggedInUserData(emp);
-        localStorage.setItem(
-          "loggedInUser",
-          JSON.stringify({ role: "employee", email })
-        );
-      } else {
-        alert("Invalid email or password");
+    if (email == 'admin@gmail.com' && password == '123') {
+      setUser('admin')
+      localStorage.setItem('loggedInUser', JSON.stringify({ role: 'admin' }))
+    } else if (userData) {
+      const employee = userData.find((e) => email == e.email && e.password == password)
+      if (employee) {
+        setUser('employee')
+        setLoggedInUserData(employee)
+        localStorage.setItem('loggedInUser', JSON.stringify({ role: 'employee',data:employee }))
       }
     }
-  };
+    else {
+      alert("Invalid Credentials")
+    }
+  }
 
 //   return (
 //     <>
@@ -132,31 +105,33 @@ const [userData, setUserData] = useState(null)
 //   )
 // }
 
-const handleLogout = () => {
-    setUserRole(null);
-    setUserData(null);
-    localStorage.removeItem('loggedInUser');
-  };
+// const handleLogout = () => {
+//     setUserRole(null);
+//     setUserData(null);
+//     localStorage.removeItem('loggedInUser');
+//   };
 
-  // While we’re reading localStorage, don’t render anything
-  if (isRehydrating) {
-    return null; // or a spinner/placeholder
-  }
+//   // While we’re reading localStorage, don’t render anything
+//   if (isRehydrating) {
+//     return null; // or a spinner/placeholder
+//   }
 
-  // If still not logged in, show login form
-  if (!userRole) {
-    return <Login handleLogin={handleLogin} />;
-  }
+//   // If still not logged in, show login form
+//   if (!userRole) {
+//     return <Login handleLogin={handleLogin} />;
+//   }
 
 
- if (!userRole) {
-    return <Login handleLogin={handleLogin} />;
-  }
+//  if (!userRole) {
+//     return <Login handleLogin={handleLogin} />;
+//   }
 
-  return userRole === "admin" ? (
-    <AdminDashboard changeUser={setUserRole} data={loggedInUserData} onLogout={handleLogout}/>
-  ) : (
-    <EmployeeDashboard changeUser={setUserRole} data={loggedInUserData} onLogout={handleLogout}/>
-  );
+  return (
+    <>
+      {!user ? <Login handleLogin={handleLogin} /> : ''}
+      {user == 'admin' ? <AdminDashboard changeUser={setUser} /> : (user == 'employee' ? <EmployeeDashboard changeUser={setUser} data={loggedInUserData} /> : null) }
+    </>
+  )
 }
+
 export default App
