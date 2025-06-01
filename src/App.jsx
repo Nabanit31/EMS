@@ -3,8 +3,6 @@ import { useContext,useState,useEffect } from 'react'
 import Login from './Components/Auth/Login'
 import AdminDashboard from './Components/Dashboard/AdminDashboard'
 import EmployeeDashboard from './Components/Dashboard/EmployeeDashboard'
-import { getLocalStorage } from './Utils/LocalStorage'
-import { setLocalStorage } from './Utils/LocalStorage'
 import { AuthContext } from './Context/AuthProvider'
 
 const App = () => {
