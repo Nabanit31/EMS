@@ -3,7 +3,7 @@
     {
       "id": 1,
       "firstName": "Rohan",
-      "email": "employee1@gmail.com",
+      "email": "Rohan@gmail.com",
       "password": "123",
       "tasks": [
         {
@@ -57,7 +57,7 @@
     {
       "id": 2,
       "firstName": "Priya",
-      "email": "employee2@gmail.com",
+      "email": "Priya@gmail.com",
       "password": "123",
       "tasks": [
         {
@@ -101,7 +101,7 @@
     {
       "id": 3,
       "firstName": "Amit",
-      "email": "employee3@gmail.com",
+      "email": "Amit@gmail.com",
       "password": "123",
       "tasks": [
         {
@@ -155,7 +155,7 @@
     {
       "id": 4,
       "firstName": "Sneha",
-      "email": "employee4@gmail.com",
+      "email": "Sneha@gmail.com",
       "password": "123",
       "tasks": [
         {
@@ -199,7 +199,7 @@
     {
       "id": 5,
       "firstName": "Rahul",
-      "email": "employee5@gmail.com",
+      "email": "Rahul@gmail.com",
       "password": "123",
       "tasks": [
         {

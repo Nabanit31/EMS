@@ -1,10 +1,12 @@
 import React from 'react';
-
+import { toast } from 'react-toastify';
 const Header = (props ) => {
   const logOutUser = () => {
     // clear the stored user
     localStorage.setItem('loggedInUser', '');
     // lift state back up to App
+    // 2) Show a “logged out” toast
+   toast.info('Logged out');
     props.changeUser('');
   };
 
@@ -13,7 +15,7 @@ const Header = (props ) => {
       <h1 className="text-2xl font-medium">
         Hello, <br />
         <span className="text-3xl font-semibold">
-          {props.firstName || "Nabanit"} 👋
+          {props.firstName || "Arjun"} 👋
         </span>
       </h1>
       <button

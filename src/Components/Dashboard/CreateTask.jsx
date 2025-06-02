@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import { AuthContext } from "../../Context/AuthProvider"
+import { toast } from 'react-toastify';
 
 const CreateTask = () => {
   const [userData, setUserData] = useContext(AuthContext)
@@ -50,7 +51,11 @@ const CreateTask = () => {
     setTaskDate('');
     setAssignTo('');
     setCategory('');
-    }
+
+    // Show a success toast once the task has been created
+    toast.success(`Task assigned to ${assignTo} successfully!`);
+    
+  }
 
   return (
     <div>
