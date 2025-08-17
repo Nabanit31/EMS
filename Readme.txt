@@ -21,4 +21,13 @@ Here to View the Admin page use the email : admin@gmail.com and password:123.
 and For employee login use the email : {(Employee Name)(Camel case)}@gmail.com  password:123
                             for example -> Employee email : Sneha@gmail.com and password : 123
 while Assigning the task please use the camel case white assigning the Task.
- 
+
+Technologies Used
+
+Frontend: React.js 
+
+
+Styling: Tailwind CSS 
+
+
+Database: LocalStorage 
