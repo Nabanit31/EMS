@@ -204,13 +204,7 @@ This project helped in understanding:
 - GitHub: https://github.com/Nabanit31
 - LinkedIn: Add your LinkedIn profile here
 
----
 
-# 📄 License
-
-This project is open-source and available under the **MIT License**.
-
----
 
 # ⭐ Repository
 
