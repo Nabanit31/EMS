@@ -166,7 +166,7 @@ Password: 123
 ## Employee Login
 
 ```bash
-Email: employee@gmail.com
+Email: (employeenamegivenintheadminsection)@gmail.com
 Password: 123
 ```
 
