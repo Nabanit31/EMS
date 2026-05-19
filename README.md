@@ -147,7 +147,7 @@ npm run dev
 ## 5️⃣ Open in Browser
 
 ```bash
-http://localhost:5173
+https://emsbynabanit.netlify.app/
 ```
 
 ---
